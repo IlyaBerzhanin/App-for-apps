@@ -1,0 +1,24 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    height: 100%;
+    //font-size: calc(10px + (24 - 1) * ((100vw - 375px) / ((1280 - 375))));
+  }
+  
+  body {
+    background-color: rgba(235, 228, 228, 0.829);
+  }
+
+  #app {
+    height: 100vh;
+    width: 100%;
+  }
+
+
+ @import './vars.scss';
+ @import './mixins.scss';
