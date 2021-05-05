@@ -6,6 +6,7 @@ import sendacard from "@/views/sendacard"
 import login from "@/views/login"
 import register from "@/views/register"
 import mail from "@/views/mail"
+import currency from "@/views/currency"
 
 import store from "@/store/index";
 
@@ -33,6 +34,12 @@ const routes = [
     name: "sendacard",
     meta: { layout: "main" },
     component: sendacard,
+  },
+  {
+    path: "/currency",
+    name: "currency",
+    meta: { layout: "main" },
+    component: currency,
   },
   {
     path: "/login",
