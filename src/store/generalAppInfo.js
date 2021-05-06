@@ -6,10 +6,10 @@ export default [
     link: "/sendacard",
   },
   {
-    name: "food for mood",
+    name: "currency",
     description:
-      "This app provides you an opportunity to choose a dish according to your mood!",
-    link: "/foodformood",
+      "This app provides you an opportunity to check the currency at the moment!",
+    link: "/currency",
   },
   {
     name: "film database",
