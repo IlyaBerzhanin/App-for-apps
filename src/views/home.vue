@@ -31,18 +31,24 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
 
   computed: {
-      
-    ...mapGetters(['user']),
-  
+    ...mapGetters(["user"]),
+
     appsData() {
       return [...generalAppInfo];
     },
+  },
+
+  created() {
+    let source = new EventSource("http://localhost:3000/");
+    
+     source.addEventListener('message', (e) => {
+       console.log(e.data)
+       source.close()
+       })
   },
 };
 </script>

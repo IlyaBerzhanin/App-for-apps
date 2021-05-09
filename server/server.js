@@ -1,31 +1,33 @@
-const express = require('express')
-const PORT =  3003
-const path = require('path');
-const app = express()
+const express = require("express");
+const PORT = 3000;
 
-app.use(express.urlencoded({extended: true}))
-app.use('/', express.static(path.join(__dirname, '../dist')))
+const app = express();
 
-// const data = {
-//     rub: 10,
-//     dollar: 30
-// }
+app.use(express.urlencoded({ extended: true }));
 
-async function init() {
-    try {
-        
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.writeHead(200, {
+    Connection: "keep-alive",
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-cache",
+  });
+  next();
+});
 
-    app.listen(PORT, () => {
-        console.log('This server has been started...');
+app.get("/", (req, res) => {
+  console.log(Date.now());
 
-        setInterval(() => {
-           // console.log(data);
-        }, 5000)
-    })
-    }
-    catch(e) {
-        console.log(e);
-    }
-}
+  res.write("id: 1\n");
+  res.write("data: some text\n\n");
 
-init()
+  res.end();
+});
+
+app.listen(PORT, () => {
+  console.log("This server has been started...");
+});
