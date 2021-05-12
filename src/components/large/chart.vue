@@ -2,6 +2,10 @@
 import { Line } from "vue3-chart-v2";
 
 export default {
+  props: {
+    chartData: Object
+  },
+
   extends: Line,
   data() {
     return {
@@ -10,6 +14,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.chartData);
     this.$refs.canvas.style.backgroundColor = "#443943";
     this.$refs.canvas.style.width = "30vw";
     this.gradient = this.$refs.canvas
@@ -22,8 +27,8 @@ export default {
       {
         datasets: [
           {
-            label: "example",
-            data: [10, 2, 13, 40, 50, 44,],
+            label: "value",
+            data: this.chartData.currencyValues,
             backgroundColor: this.gradient,
             pointBackgroundColor: "white",
             pointRadius: 4,
@@ -32,14 +37,7 @@ export default {
           },
         ],
         // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: [
-          "Red",
-          "Yellow",
-          "Blue",
-          "Green",
-          "ops",
-          "R"
-        ],
+        labels: this.chartData.dateValues
       },
       { responsive: false }
     );

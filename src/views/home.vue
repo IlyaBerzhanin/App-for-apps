@@ -43,12 +43,13 @@ export default {
   },
 
   created() {
-    let source = new EventSource("http://localhost:3000/");
+    // let source = new EventSource("http://localhost:3000/");
     
-     source.addEventListener('message', (e) => {
-       console.log(e.data)
-       source.close()
-       })
+    //  source.addEventListener('message', (e) => {
+    //    console.log(e.data)
+    //    source.close()
+    //    })
+    
   },
 };
 </script>

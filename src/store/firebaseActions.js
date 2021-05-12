@@ -97,6 +97,12 @@ export default {
       console.log("no user");
     }
   },
+
+  async  getCurrencyFromFirebase() {
+    let currencies = await firebase.database().ref('currencies').once('value').then(data => data.val())
+    return currencies
+  }
+
 };
 
 async function getAndFetchUserMessages() {

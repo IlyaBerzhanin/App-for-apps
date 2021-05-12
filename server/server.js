@@ -1,6 +1,8 @@
 const express = require("express");
 const PORT = 3000;
 
+const firebaseHelpers = require('./helpers/firebaseHelpers')
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -22,12 +24,17 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   console.log(Date.now());
 
-  res.write("id: 1\n");
-  res.write("data: some text\n\n");
+  // res.write("id: 1\n");
+  // res.write("data: some text\n\n");
 
   res.end();
 });
 
 app.listen(PORT, () => {
   console.log("This server has been started...");
+ firebaseHelpers.initFirebase()
+ firebaseHelpers.getCurrencyFromApiAndPushToFirebase()
+  
 });
+
+
