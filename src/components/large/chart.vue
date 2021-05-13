@@ -14,7 +14,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.chartData);
     this.$refs.canvas.style.backgroundColor = "#443943";
     this.$refs.canvas.style.width = "30vw";
     this.gradient = this.$refs.canvas
@@ -44,3 +43,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+
+</style>

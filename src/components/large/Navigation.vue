@@ -48,12 +48,7 @@ export default {
   color: darksalmon;
 }
 
-.greeting {
-  text-shadow: 6px 6px 0px rgba(175, 40, 40, 0.2);
-  color: white;
-  text-transform: capitalize;
-  padding: 1rem;
-}
+
 
 .navbar {
   @include flex(row, space-around, center);
@@ -88,8 +83,5 @@ export default {
   }
 }
 
-.apps-title {
-  text-transform: uppercase;
-  color: burlywood;
-}
+
 </style>

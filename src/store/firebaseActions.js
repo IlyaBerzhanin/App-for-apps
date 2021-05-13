@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import store from "@/store/index";
 import toastActions from '@/store/toastActions'
+import dateFilter from '@/filters/date.filter'
 
 export default {
   async registerUser(userName, userEmail, userPassword, callback) {
@@ -80,7 +81,8 @@ export default {
       callback();
 
       let userUid = Object.keys(adresser)[0];
-      let currDate = new Date();
+      let currStamp =  Date.now();
+      let currDate = dateFilter(currStamp, 'datetime')
 
       await firebase
         .database()

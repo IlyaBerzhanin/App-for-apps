@@ -33,9 +33,12 @@ const firebaseConfig = {
   .get(
     `http://data.fixer.io/api/latest?access_key=${KEY}&symbols=USD,BYN,RUB,UAH,)`
   )
-  .then((data) => data.data)
+  .then((data) => {
+    let currentDate = Date.now()
+    data.data.fullDate = currentDate
+    return data.data
+  })
   .catch((e) => console.log(e));
-  
 
    if(currencies.length >= quantityOfCurrenciesInDatabase) {
        currencies.shift()
@@ -47,5 +50,5 @@ const firebaseConfig = {
    }
  
 }
-
+ 
 module.exports = { getCurrencyFromApiAndPushToFirebase, initFirebase }
