@@ -31,7 +31,7 @@ export default {
 
   async created() {
    this.currencies = await firebaseActions.getCurrencyFromFirebase()
-   this.lastUpdate = dateFilter(this.currencies[0].fullDate, 'datetime')
+   this.lastUpdate = dateFilter(this.currencies[this.currencies.length - 1].fullDate, 'datetime')
 
 
   for(let rate in this.currencies[0].rates) {

@@ -29,6 +29,10 @@ export default createStore({
 
     SET_USER_MESSAGES(state, messages) {
       state.user.data.messages = messages
+    },
+
+    SET_USER_APP_RATING(state, rating) {
+      state.user.data.appRating = rating
     }
 
   },
@@ -54,6 +58,10 @@ export default createStore({
 
      fetchUserMessages({commit}, messages) {
        commit('SET_USER_MESSAGES', messages)
+    },
+
+    fetchUserAppRating({commit}, rating) {
+      commit('SET_USER_APP_RATING', rating)
     }
 
   },

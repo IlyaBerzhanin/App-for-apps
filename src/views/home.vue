@@ -1,15 +1,21 @@
 <template lang="pug">
 template(v-if="user.loggedIn")
   h1(class="greeting") Welcome dear {{ user.data.displayName }} !
+  userRating
 </template>
 
 <script>
-
 import { mapGetters } from "vuex";
+import userRating from '@/components/small/userRating'
 
 export default {
+  components: {
+    userRating
+  },
   data() {
-    return {};
+    return {
+   
+    };
   },
 
   computed: {
@@ -18,18 +24,15 @@ export default {
 
   created() {
     // let source = new EventSource("http://localhost:3000/");
-    
     //  source.addEventListener('message', (e) => {
     //    console.log(e.data)
     //    source.close()
     //    })
-    
   },
 };
 </script>
 
 <style lang="scss">
-
 .greeting {
   text-shadow: 6px 6px 0px rgba(175, 40, 40, 0.2);
   color: white;

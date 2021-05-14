@@ -23,6 +23,7 @@
     "sass-resources-loader": "^2.2.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vue-star-rating": "^2.1.0",
     "vue-toastification": "^2.0.0-rc.1",
     "vue3-chart-v2": "^0.8.2",
     "vuelidate": "^0.7.6",

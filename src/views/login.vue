@@ -1,6 +1,4 @@
 <template lang="pug">
-h1 login page
-
 form(
     @submit.prevent="submitHandler"
     class="col s12 form"
@@ -82,7 +80,7 @@ export default {
   align-items: center;
   border: 2px solid #d1c4e9;
   width: 30rem;
-  margin: 0 auto;
+  margin: 12rem auto 0rem;
   padding: 5rem;
 
   &.row {

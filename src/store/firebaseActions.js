@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import store from "@/store/index";
-import toastActions from '@/store/toastActions'
-import dateFilter from '@/filters/date.filter'
+import toastActions from "@/store/toastActions";
+import dateFilter from "@/filters/date.filter";
 
 export default {
   async registerUser(userName, userEmail, userPassword, callback) {
@@ -36,14 +36,14 @@ export default {
   },
 
   async logoutUser(callback) {
-   await firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          store.dispatch('fetchUser', false)
-          store.dispatch('fetchUserLog', false)
-        })
-    callback()
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        store.dispatch("fetchUser", false);
+        store.dispatch("fetchUserLog", false);
+      });
+    callback();
   },
 
   listenChangesInUserMessages() {
@@ -54,7 +54,7 @@ export default {
       .child("messages")
       .on("child_added", () => {
         getAndFetchUserMessages();
-        toastActions.showInfoMessage('You have been received a new message!')
+        toastActions.showInfoMessage("You have been received a new message!");
       });
 
     firebase
@@ -64,7 +64,9 @@ export default {
       .child("messages")
       .on("child_removed", () => {
         getAndFetchUserMessages();
-        toastActions.showInfoMessage('Your message has been successfully deleted!')
+        toastActions.showInfoMessage(
+          "Your message has been successfully deleted!"
+        );
       });
   },
 
@@ -81,8 +83,8 @@ export default {
       callback();
 
       let userUid = Object.keys(adresser)[0];
-      let currStamp =  Date.now();
-      let currDate = dateFilter(currStamp, 'datetime')
+      let currStamp = Date.now();
+      let currDate = dateFilter(currStamp, "datetime");
 
       await firebase
         .database()
@@ -100,11 +102,40 @@ export default {
     }
   },
 
-  async  getCurrencyFromFirebase() {
-    let currencies = await firebase.database().ref('currencies').once('value').then(data => data.val())
-    return currencies
-  }
+  async getCurrencyFromFirebase() {
+    let currencies = await firebase
+      .database()
+      .ref("currencies")
+      .once("value")
+      .then((data) => data.val());
+    return currencies;
+  },
 
+  async addUserRating(user) {
+    let currUserRating = await firebase
+      .database()
+      .ref("ratings")
+      .orderByChild("userId")
+      .equalTo(user.data.uid)
+      .once("value")
+      .then((data) => data.val());
+
+    if (!currUserRating) {
+      await firebase
+        .database()
+        .ref("ratings")
+        .push({
+          userName: user.data.displayName,
+          userId: user.data.uid,
+          rating: user.data.appRating,
+        });
+    } else {
+      let postId = Object.keys(currUserRating)
+      await firebase.database().ref(`ratings/${postId}`).update({
+        rating: user.data.appRating
+      })
+    }
+  },
 };
 
 async function getAndFetchUserMessages() {
