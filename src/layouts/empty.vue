@@ -3,11 +3,18 @@
 router-view
 .app-overview-block
     p.overview-title Our application was estimated by {{ nubmerOfUsersFeedbacks }} users.
-    p.overview-subtitle Our current rating is: {{ rating }}
-    StarRating
+    StarRating(
+        :rating="rating"
+        :increment="0.1"
+        :read-only="true"
+        :star-size="70"
+        :padding="10"
+        text-class="rating-value"
+    )
 </template>
 
 <script>import StarRating from "vue-star-rating";
+import firebaseActions from "@/store/firebaseActions";
 
 export default {
     components: {
@@ -19,6 +26,12 @@ export default {
             nubmerOfUsersFeedbacks: 0,
             rating: 0,
         }
+    },
+
+    async created() {
+      this.ratingData = await firebaseActions.getAverageRating()
+      this.rating = this.ratingData.rating
+      this.nubmerOfUsersFeedbacks = this.ratingData.numberOfUsers
     }
 }
 </script>
@@ -34,7 +47,20 @@ export default {
 }
 
 .app-overview-block {
-background-color: chartreuse;
+padding: 3rem;
+
+    & .overview-title {
+        padding: 2rem;
+        font-size: 2rem;
+        color: darkseagreen;
+    }
+
+    & .rating-value {
+        color: rgb(131, 119, 207);
+        font-size: 2rem;
+        padding: 1rem;
+        letter-spacing: 0.4rem;
+    }
 }
 
 </style>

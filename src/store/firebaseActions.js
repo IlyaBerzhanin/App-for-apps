@@ -136,6 +136,15 @@ export default {
       })
     }
   },
+
+  async getAverageRating() {
+  let allRatings =  await firebase.database().ref('ratings').once('value').then(data => Object.values(data.val()).map(el => el.rating))
+  let averageRating = allRatings.reduce((previous, current) => (previous + current)) / allRatings.length
+  return {
+    rating: averageRating,
+    numberOfUsers: allRatings.length
+  }
+  }
 };
 
 async function getAndFetchUserMessages() {
