@@ -28,8 +28,9 @@ import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
 import Subbutton from "@/components/small/Subbutton";
 
-import firebaseActions from '@/store/firebaseActions'
-import toastActions from '@/store/toastActions'
+import store from "@/store/index";
+
+import toastActions from "@/store/toastActions";
 
 export default {
   components: {
@@ -45,7 +46,7 @@ export default {
       password: "",
       submitButtonName: "Log In",
       submitButtonIconName: "login",
-      loginMessage: 'You have been logged in!',
+      loginMessage: "You have been logged in!",
     };
   },
 
@@ -59,13 +60,20 @@ export default {
   methods: {
     async submitHandler() {
       this.v$.$touch();
+
       if (this.v$.$error) {
-        toastActions.showLogAndRegErrors(this.v$.$errors)
-        return
+        toastActions.showLogAndRegErrors(this.v$.$errors);
+        return;
       }
 
-     await firebaseActions.loginUser(this.email, this.password, () => {this.$router.push("/")})
-     toastActions.showSuccessMessage(this.loginMessage)
+     await store.dispatch("loginUser", {
+        email: this.email,
+        password: this.password,
+      });
+
+      this.$router.push("/")
+
+      toastActions.showSuccessMessage(this.loginMessage);
     },
   },
 };

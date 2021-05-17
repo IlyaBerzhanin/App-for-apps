@@ -9,8 +9,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
-import firebaseActions from '@/store/firebaseActions'
-
 import Toast from "vue-toastification"
 import "vue-toastification/dist/index.css"
 
@@ -41,6 +39,6 @@ createApp(App)
   .mount("#app");
 
 
-firebaseActions.listenChangesInUserMessages()
+store.dispatch('listenChangesInUserMessages')
 
 

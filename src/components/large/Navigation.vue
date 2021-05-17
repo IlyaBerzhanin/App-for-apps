@@ -16,13 +16,14 @@ nav(class="navbar deep-purple lighten-3")
 </template>
 
 <script>
-import firebaseActions from '@/store/firebaseActions'
-import toastActions from '@/store/toastActions'
+
+import store from "@/store/index";
+import toastActions from "@/store/toastActions";
 
 export default {
   data() {
     return {
-      logoutMessage: 'You have been logged out!',
+      logoutMessage: "You have been logged out!",
       links: [
         { name: "apps", adress: "/apps" },
         { name: "home", adress: "/home" },
@@ -32,9 +33,10 @@ export default {
   },
 
   methods: {
-  async  logout() {
-     await firebaseActions.logoutUser(() => this.$router.push("/login"))
-     toastActions.showSuccessMessage(this.logoutMessage)
+    async logout() {
+      await store.dispatch("logoutUser");
+      this.$router.push("/login");
+      toastActions.showSuccessMessage(this.logoutMessage);
     },
   },
 };
@@ -47,8 +49,6 @@ export default {
   background-color: rgb(255, 255, 255);
   color: darksalmon;
 }
-
-
 
 .navbar {
   @include flex(row, space-around, center);
@@ -82,6 +82,4 @@ export default {
     }
   }
 }
-
-
 </style>

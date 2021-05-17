@@ -1,6 +1,5 @@
 import firebase from "firebase/app";
 import store from "@/store/index";
-import toastActions from "@/store/toastActions";
 import dateFilter from "@/filters/date.filter";
 
 export default {
@@ -19,55 +18,6 @@ export default {
       });
     await userCreation.user.updateProfile({ displayName: userName });
     callback();
-  },
-
-  async loginUser(userEmail, userPassword, callback) {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(userEmail, userPassword);
-
-      await store.dispatch("fetchUser", firebase.auth().currentUser);
-
-      await getAndFetchUserMessages();
-
-      callback();
-    } catch (err) {
-      console.log("sign err", err);
-    }
-  },
-
-  async logoutUser(callback) {
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        store.dispatch("fetchUser", false);
-        store.dispatch("fetchUserLog", false);
-      });
-    callback();
-  },
-
-  listenChangesInUserMessages() {
-    firebase
-      .database()
-      .ref("users")
-      .child(store.getters.user.data.uid)
-      .child("messages")
-      .on("child_added", () => {
-        getAndFetchUserMessages();
-        toastActions.showInfoMessage("You have been received a new message!");
-      });
-
-    firebase
-      .database()
-      .ref("users")
-      .child(store.getters.user.data.uid)
-      .child("messages")
-      .on("child_removed", () => {
-        getAndFetchUserMessages();
-        toastActions.showInfoMessage(
-          "Your message has been successfully deleted!"
-        );
-      });
   },
 
   async sendTheMessage(receiver, user, callback) {
@@ -144,17 +94,21 @@ export default {
     rating: averageRating,
     numberOfUsers: allRatings.length
   }
+  },
+
+  async  getUserMessages() {
+    let messages = await firebase
+      .database()
+      .ref("users")
+      .child(store.getters.user.data.uid)
+      .child("messages")
+      .once("value")
+      .then((data) => data.val());
+  
+    return messages
   }
 };
 
-async function getAndFetchUserMessages() {
-  let messages = await firebase
-    .database()
-    .ref("users")
-    .child(store.getters.user.data.uid)
-    .child("messages")
-    .once("value")
-    .then((data) => data.val());
 
-  await store.dispatch("fetchUserMessages", messages);
-}
+
+
