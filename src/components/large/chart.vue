@@ -15,7 +15,8 @@ export default {
 
   mounted() {
     this.$refs.canvas.style.backgroundColor = "#443943";
-    this.$refs.canvas.style.width = "30vw";
+    this.$refs.canvas.style.width = "25vw";
+    //this.$refs.canvas.style.height = "30vw";
     this.gradient = this.$refs.canvas
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);

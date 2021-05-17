@@ -107,7 +107,7 @@ export default {
       .database()
       .ref("currencies")
       .once("value")
-      .then((data) => data.val());
+      .then((data) => Object.values(data.val()));
     return currencies;
   },
 

@@ -1,6 +1,6 @@
 const axios = require("axios");
 const KEY = "22512e2b320bb4f207b12d3ca6d3f50d";
-const quantityOfCurrenciesInDatabase = 7
+const quantityOfCurrenciesInDatabase = 10
 
 const firebase = require("firebase");
 const firebaseConfig = {

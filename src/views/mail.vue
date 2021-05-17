@@ -1,5 +1,5 @@
 <template lang="pug">
-h1 mail brother
+h1.messages-title incoming messages:
 ul
     messageBlock(
         v-for="(message, name) in messages"
@@ -29,4 +29,11 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.messages-title {
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-left: 4rem;
+  color: burlywood;
+}
+</style>

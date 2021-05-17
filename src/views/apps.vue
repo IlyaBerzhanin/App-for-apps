@@ -35,7 +35,8 @@ export default {
 .apps-title {
   text-transform: uppercase;
   color: burlywood;
-  padding: 5rem;
+  font-size: 3rem;
+  padding: 3rem;
 }
 
 .apps-block {

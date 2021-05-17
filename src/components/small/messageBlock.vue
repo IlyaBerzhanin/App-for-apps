@@ -74,7 +74,6 @@ export default {
 <style lang="scss">
 
 .message-block {
-  background-color: rgb(47, 158, 158);
   border-bottom: 2px solid rgb(171, 197, 53);
 
   &-item {
@@ -84,7 +83,7 @@ export default {
     & .message-topic {
       display: flex;
       justify-content: space-between;
-      background-color: rgb(250, 250, 250);
+      background-color: #5f5f8c12;
       font-size: 2rem;
       text-transform: capitalize;
       padding: 1rem;
